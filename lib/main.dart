@@ -1,7 +1,11 @@
-import 'package:flutter/material.dart';void main() {
+import 'package:flutter/material.dart';
+
+void main() {
   runApp(const MyApp());
-}class MyApp extends StatelessWidget {
-  const MyApp({super.key});  // This widget is the root of your application.
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key}); // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,56 +18,66 @@ import 'package:flutter/material.dart';void main() {
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
-}class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});  final String title;  @override
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key, required this.title});
+  final String title;
+  @override
   State<MyHomePage> createState() => _MyHomePageState();
-}class _MyHomePageState extends State<MyHomePage> {
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String _menuTitle = 'Menu';
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-  backgroundColor: const Color(0xFF00A3FE),
-  centerTitle: true,
-  toolbarHeight: 70,
-  title: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    crossAxisAlignment: CrossAxisAlignment.center,
-    children: <Widget>[
-      SizedBox(width: 16.0), // Ajouter un espace à gauche de l'image
-      Image.asset(
-        'images/logo_header.png',
-        height: 40,
-      ),
-      const SizedBox(width: 56.0), // Ajouter un espace entre l'image et le champ de recherche
-      Expanded(
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(25.0),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.only(left: 8.0),
-            child: TextField(
-              textAlign: TextAlign.start,
-              decoration: InputDecoration(
-                hintText: 'Recherche...',
-                border: InputBorder.none,
-                prefixIcon: Icon(Icons.search),
+        backgroundColor: const Color(0xFF00A3FE),
+        centerTitle: true,
+        toolbarHeight: 70,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            SizedBox(width: 16.0), // Ajouter un espace à gauche de l'image
+            Image.asset(
+              'images/logo_header.png',
+              height: 40,
+            ),
+            const SizedBox(
+                width:
+                    56.0), // Ajouter un espace entre l'image et le champ de recherche
+            Expanded(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: TextField(
+                    textAlign: TextAlign.start,
+                    decoration: InputDecoration(
+                      hintText: 'Recherche...',
+                      border: InputBorder.none,
+                      prefixIcon: Icon(Icons.search),
+                    ),
+                  ),
+                ),
               ),
             ),
-          ),
+            SizedBox(width: 16.0), // Ajouter un espace entre le champ de recherche et l'icône
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.settings),
+              color: Colors.white,
+            ),
+            SizedBox(width: 16.0), // Ajouter un espace à droite de l'icône
+          ],
         ),
       ),
-      SizedBox(width: 16.0), // Ajouter un espace entre le champ de recherche et l'icône
-      IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.settings),
-        color: Colors.white,
-      ),
-      SizedBox(width: 16.0), // Ajouter un espace à droite de l'icône
-    ],
-  ),
-),
       body: Row(
         children: [
           SizedBox(
@@ -121,27 +135,47 @@ import 'package:flutter/material.dart';void main() {
                             ListTile(
                               leading: const Icon(Icons.bar_chart),
                               title: const Text('Statistiques'),
-                              onTap: () {},
+                              onTap: () {
+                                setState(() {
+                                  _menuTitle = 'Statistiques DataDog';
+                                });
+                              },
                             ),
                             ListTile(
                               leading: const Icon(Icons.image),
                               title: const Text('Images'),
-                              onTap: () {},
+                              onTap: () {
+                                setState(() {
+                                  _menuTitle = 'Images';
+                                });
+                              },
                             ),
                             ListTile(
                               leading: const Icon(Icons.person),
                               title: const Text('Utilisateurs'),
-                              onTap: () {},
+                              onTap: () {
+                                setState(() {
+                                  _menuTitle = 'Utilisateurs';
+                                });
+                              },
                             ),
                             ListTile(
                               leading: const Icon(Icons.share),
                               title: const Text('Partage'),
-                              onTap: () {},
+                              onTap: () {
+                                setState(() {
+                                  _menuTitle = 'Partage';
+                                });
+                              },
                             ),
                             ListTile(
                               leading: const Icon(Icons.settings),
                               title: const Text('Paramètres'),
-                              onTap: () {},
+                              onTap: () {
+                                setState(() {
+                                  _menuTitle = 'Paramètres';
+                                });
+                              },
                             ),
                           ],
                         ),
@@ -152,8 +186,33 @@ import 'package:flutter/material.dart';void main() {
               ],
             ),
           ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                child: Text(
+                  _menuTitle,
+                  style: const TextStyle(fontSize: 24),
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
+
+// pour que le text soit en haut a gauche 
+// Expanded(
+//             child: Padding(
+//               padding: const EdgeInsets.all(16.0),
+//               child: Align(
+//                 alignment: Alignment.topLeft,
+//                 child: Text(
+//                   _menuTitle,
+//                   style: const TextStyle(fontSize: 24),
+//                 ),
+//               ),
+//             ),
+//           ),
